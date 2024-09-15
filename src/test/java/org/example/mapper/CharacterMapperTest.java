@@ -2,8 +2,6 @@ package org.example.mapper;
 
 import org.example.domain.Character;
 import org.example.entity.CharacterEntity;
-import org.example.repository.CharacterRepository;
-import org.example.service.CharacterService;
 import org.example.util.TestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
