@@ -1,18 +1,15 @@
 package org.example.service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.example.domain.Character;
 import org.example.entity.CharacterEntity;
 import org.example.exception.CharacterNotFoundException;
 import org.example.mapper.CharacterMapper;
-import org.example.mapper.CharacterMapperImpl;
 import org.example.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

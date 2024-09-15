@@ -9,7 +9,6 @@ import org.example.util.TestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
@@ -140,13 +139,13 @@ class CharacterServiceTest {
         when(characterMapper.toDomain(updatedCharacterEntity))
                 .thenReturn(character);
 
-        characterService.updateCharacter(characterId,character);
+        characterService.updateCharacter(characterId, character);
 
         assertEquals(character.getId(), characterService.updateCharacter(characterId, character).getId());
     }
 
     @ParameterizedTest
-    @MethodSource("org.example.util.provideValues#provideValuesForUpdateTest")
+    @MethodSource("org.example.util.ProvideValues#provideValuesForUpdateTest")
     void shouldThrowNotFoundExceptionBeforeUpdateCharacter(UUID characterId, Character character) {
         assertThrows(
                 CharacterNotFoundException.class,
