@@ -1,12 +1,16 @@
 package org.example.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.example.common.CharacterType;
 import org.example.entity.CharacterEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
+@RequiredArgsConstructor
 public class CharacterRepository {
 
     private static final List<CharacterEntity> db = List.of(
