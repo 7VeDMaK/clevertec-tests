@@ -8,6 +8,9 @@ import org.example.repository.CharacterRepository;
 import org.example.util.TestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.Optional;
@@ -124,7 +127,31 @@ class CharacterServiceTest {
     }
 
     @Test
-    void updateCharacter() {
+    void shouldUpdateCharacter() {
+        UUID characterId = UUID.randomUUID();
+        CharacterEntity characterEntity = new CharacterEntity();
+        CharacterEntity updatedCharacterEntity = new CharacterEntity().setId(characterId);
+        Character character = new Character();
+
+        when(characterRepository.updateCharacter(characterId, characterEntity))
+                .thenReturn(updatedCharacterEntity);
+        when(characterMapper.toEntity(character))
+                .thenReturn(characterEntity);
+        when(characterMapper.toDomain(updatedCharacterEntity))
+                .thenReturn(character);
+
+        characterService.updateCharacter(characterId,character);
+
+        assertEquals(character.getId(), characterService.updateCharacter(characterId, character).getId());
+    }
+
+    @ParameterizedTest
+    @MethodSource("org.example.util.provideValues#provideValuesForUpdateTest")
+    void shouldThrowNotFoundExceptionBeforeUpdateCharacter(UUID characterId, Character character) {
+        assertThrows(
+                CharacterNotFoundException.class,
+                () -> characterService.updateCharacter(characterId, character)
+        );
     }
 
     @Test

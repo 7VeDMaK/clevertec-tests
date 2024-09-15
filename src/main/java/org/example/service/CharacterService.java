@@ -41,6 +41,8 @@ public class CharacterService {
     }
 
     public Character updateCharacter(UUID id, Character character) {
+        if (id == null) throw CharacterNotFoundException.byCharacterId(UUID.randomUUID());
+        if (character == null) throw CharacterNotFoundException.byCharacterId(id);
         CharacterEntity characterEntity = characterMapper.toEntity(character);
         CharacterEntity updatedEntity = characterRepository.updateCharacter(id, characterEntity);
 
