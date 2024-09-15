@@ -1,19 +1,23 @@
 package org.example.service;
 
+import lombok.AllArgsConstructor;
 import org.example.domain.Character;
 import org.example.entity.CharacterEntity;
+import org.example.exception.CharacterNotFoundException;
 import org.example.mapper.CharacterMapper;
 import org.example.mapper.CharacterMapperImpl;
 import org.example.repository.CharacterRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+@AllArgsConstructor
 public class CharacterService {
 
-    private final CharacterRepository characterRepository = new CharacterRepository();
+    private final CharacterRepository characterRepository;
 
-    private final CharacterMapper characterMapper = new CharacterMapperImpl();
+    private final CharacterMapper characterMapper;
 
     public List<Character> getCharacters() {
         List<CharacterEntity> characters = characterRepository.getCharacters();
@@ -22,12 +26,14 @@ public class CharacterService {
     }
 
     public Character getCharacter(UUID id) {
-        CharacterEntity character = characterRepository.getCharacter(id);
+        CharacterEntity character = characterRepository.getCharacter(id)
+                .orElseThrow(() -> CharacterNotFoundException.byCharacterId(id));
 
         return characterMapper.toDomain(character);
     }
 
     public Character createCharacter(Character character) {
+        if (character == null) throw CharacterNotFoundException.byCharacterId(UUID.randomUUID());
         CharacterEntity characterEntity = characterMapper.toEntity(character);
         CharacterEntity createdEntity = characterRepository.createCharacter(characterEntity);
 

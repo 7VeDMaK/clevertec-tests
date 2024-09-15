@@ -4,6 +4,7 @@ import org.example.common.CharacterType;
 import org.example.entity.CharacterEntity;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class CharacterRepository {
@@ -20,8 +21,8 @@ public class CharacterRepository {
         return db;
     }
 
-    public CharacterEntity getCharacter(UUID id) {
-        return db.getFirst();
+    public Optional<CharacterEntity> getCharacter(UUID id) {
+        return Optional.ofNullable(db.getFirst());
     }
 
     public CharacterEntity createCharacter(CharacterEntity character) {
