@@ -10,8 +10,16 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.3.0'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.0'
+
 }
 
 test {
