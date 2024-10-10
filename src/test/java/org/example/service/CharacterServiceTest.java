@@ -8,8 +8,12 @@ import org.example.repository.CharacterRepository;
 import org.example.util.TestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,18 +25,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class CharacterServiceTest {
 
+    @Mock
     private CharacterRepository characterRepository;
-    private CharacterMapper characterMapper;
-    private CharacterService characterService;
 
-    @BeforeEach
-    void setup() {
-        characterRepository = mock(CharacterRepository.class);
-        characterMapper = mock(CharacterMapper.class);
-        characterService = new CharacterService(characterRepository, characterMapper);
-    }
+    @Mock
+    private CharacterMapper characterMapper;
+
+    @InjectMocks
+    private CharacterService characterService;
 
     @Test
     void shouldGetCharacters() {
